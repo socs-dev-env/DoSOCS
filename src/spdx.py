@@ -241,6 +241,26 @@ class SPDX:
 
         return output
 
+    def getSPDXPackage(self, spdx_package):
+        '''Retrieves the spdx_package based on input package name'''
+
+        with MySQLdb.connect(    host=settings.database_host,
+                                user=settings.database_user,
+                                passwd=settings.database_pass,
+                                db=settings.database_name) as dbCursor:
+            sqlCommand = """SELECT     id
+                            FROM spdx_docs
+                            WHERE upload_file_name = %s
+                            ORDER BY ID DESC"""
+            dbCursor.execute(sqlCommand, (spdx_package))
+            rows = dbCursor.fetchone()
+            if rows != None:
+                spdx_doc_id = rows[0]
+                return self.getSPDX(spdx_doc_id)
+            else:
+                print "SPDX Document not found in database."
+                return False
+
     def getSPDX(self, spdx_doc_id):
         '''Generates the entire object from the database.'''
 

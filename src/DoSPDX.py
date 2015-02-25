@@ -47,6 +47,7 @@ def main(argv):
                                             "scanOption=",
                                             "print=",
                                             "spdxDocId=",
+                                            "spdxDocName=",
                                             "scan"])
 
     documentComment = ""
@@ -66,6 +67,7 @@ def main(argv):
     output = ""
     scan = False
     spdxDocId = None
+    spdxDocName = None
 
     for opt, arg in opts:
         if opt == '-h':
@@ -102,6 +104,8 @@ def main(argv):
             scan = True
         elif opt == '--spdxDocId':
             spdxDocId = arg
+        elif opt == '--spdxDocName':
+            spdxDocName = arg
 
     '''Validate package path'''
     if scan and (packagePath == None or not os.path.isfile(packagePath)):
@@ -126,6 +130,9 @@ def main(argv):
     result = True;
     if spdxDocId != None:
         result = spdxDoc.getSPDX(spdxDocId)
+
+    if spdxDocName != None:
+        result = spdxDoc.getSPDXPackage(spdxDocName)
 
     if result == False:
         sys.exit()
