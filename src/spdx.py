@@ -242,7 +242,7 @@ class SPDX:
         return output
 
     def getSPDXPackage(self, spdx_package):
-        '''Retrieves the spdx_package based on input package id'''
+        '''Retrieves the spdx_package based on input package name'''
 
         with MySQLdb.connect(    host=settings.database_host,
                                 user=settings.database_user,
