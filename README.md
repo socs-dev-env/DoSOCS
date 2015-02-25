@@ -68,8 +68,11 @@ Usage
   - Optional 
   - ***Example:*** `./DoSPDX.py --documentComment "Scanned as part of the Yocto build process."`
 - `--spdxDocId [SPDX Doc Id]` Used to generate the spdx document object from the MySql Database.
-  - Conditionally optional, Required if `-s` or `--scan` is not used.
+  - Conditionally optional, Required if `-s`, `--scan`, r --spdxDocName is not used.
   - ***Example:*** `./DoSPDX.py --spdxDocId 37` 
+- `--spdxDocName [SPDX Upload Package Name]` Used to generate the spdx document object from the MySql Database based on original package name.
+  - Conditionally optional, Required if `-s`, `--scan`, or --spdxDocId is not used.
+  - ***Example:*** `./DoSPDX.py --spdxDocName archive.tar.bz2` 
 - `--creator [Creator]` Specifies who is creating the SPDX document.
   - Optional
   - ***Example:*** `./DoSPDX.py --creator "Zachary McFarland"` 
