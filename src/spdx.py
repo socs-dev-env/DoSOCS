@@ -304,7 +304,7 @@ class SPDX:
                 tempReviewerInfo.getReviwerInfo(dbCursorfetchone()[0], dbCursor)
                 self.reviewerInfo.append(tempReviewerInfo)
 
-    def generateSPDXDoc(self,scanOption):
+    def generateSPDXDoc(self):
         '''Generates the entire structure by querying and scanning the files.'''
         extractTo = tempfile.mkdtemp()
         ninka_out = tempfile.NamedTemporaryFile()
@@ -360,7 +360,7 @@ class SPDX:
                 for fileName in archive.namelist():
                     if os.path.isfile(os.path.join(extractTo, fileName)):
                         tempFileInfo = fileInfo.fileInfo(os.path.join(extractTo, fileName), os.path.join(path, fileName))
-                        tempFileInfo.populateFileInfo(self.scanOption)
+                        tempFileInfo.populateFileInfo()
                         tempLicenseInfo = licensingInfo.licensingInfo(
                                                         "LicenseRef-" + str(licenseCounter),
                                                         tempFileInfo.extractedText,
