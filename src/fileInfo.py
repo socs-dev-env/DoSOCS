@@ -32,7 +32,7 @@ class fileInfo:
     def __init__(self, filePath=None, fileRelativePath = ""):
         self.filePath = filePath
         self.fileType = None
-        self.fileChecksum = self.getChecksum()
+        self.fileChecksum = ""
         self.fileChecksumAlgorithm = "SHA1"
         self.licenseConcluded = "NO ASSERTION"
         self.licenseInfoInFile = []
@@ -93,7 +93,6 @@ class fileInfo:
 
 
     def getFileInfo(self, package_file_id, package_id, dbCursor):
-	print "Looks like it is using the package id"
         '''populates fileInfo from database'''
 
         sqlCommand = """SELECT  pf.file_name,
@@ -454,6 +453,8 @@ class fileInfo:
                try:
                    fossOutput = subprocess.check_output([settings.FOSSOLOGY_PATH,
                                                         self.filePath])
+               except OSError as ose:
+                   print "Error running FOSSology nomos, check your path to nomos in settings.py"
                except Exception as e:
                   fossOutput = str(e.output)
 
@@ -475,6 +476,8 @@ class fileInfo:
                try:
                    fossOutput = subprocess.check_output([settings.FOSSOLOGY_PATH,
                                                        self.filePath])
+               except OSError as ose:
+                   print "Error running FOSSology nomos, check your path to nomos in settings.py"
                except Exception as e:
                    fossOutput = str(e.output)
 
@@ -516,4 +519,5 @@ class fileInfo:
                                  user=settings.database_user,
                                  passwd=settings.database_pass,
                                  db=settings.database_name) as dbCursor:
+                self.getChecksum()
                 self.getFileInfoFromChecksum( dbCursor)
