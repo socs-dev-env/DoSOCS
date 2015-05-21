@@ -1,24 +1,20 @@
-#!/usr/bin/python
-'''
-<SPDX-License-Identifier: Apache-2.0>
-Copyright 2014 University of Nebraska at Omaha (UNO)
+# <SPDX-License-Identifier: Apache-2.0>
+# Copyright (c) 2014-2015 University of Nebraska at Omaha (UNO) and other
+# contributors.
 
-Licensed under the Apache License, Version 2.0 (the "License");
-you may not use this file except in compliance with the License.
-You may obtain a copy of the License at
+# Licensed under the Apache License, Version 2.0 (the "License");
+# you may not use this file except in compliance with the License.
+# You may obtain a copy of the License at
+#
+#     http://www.apache.org/licenses/LICENSE-2.0
+#
+# Unless required by applicable law or agreed to in writing, software
+# distributed under the License is distributed on an "AS IS" BASIS,
+# WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+# See the License for the specific language governing permissions and
+# limitations under the License.
 
-    http://www.apache.org/licenses/LICENSE-2.0
-
-Unless required by applicable law or agreed to in writing, software
-distributed under the License is distributed on an "AS IS" BASIS,
-WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-See the License for the specific language governing permissions and
-limitations under the License.
-'''
-
-'''
-Defines the creator info section of an spdx object.
-'''
+'''Creator info section of an SPDX object.'''
 import MySQLdb
 import datetime
 import settings
@@ -73,9 +69,9 @@ class creatorInfo:
         output += "Creator: " + str(self.creator) + '\n'
         output += "Created: " + str(self.created) + '\n'
 
-        if self.creatorComment != None:
+        if self.creatorComment is not None:
             output += "CreatorComment: " + str(self.creatorComment) + '\n'
-        if self.licenseListVersion != None:
+        if self.licenseListVersion is not None:
             output += "LicenseListVersion: "
             output += str(self.licenseListVersion) + '\n'
 
@@ -86,11 +82,11 @@ class creatorInfo:
         output += '\t\t<creator>' + str(self.creator) + '</creator>\n'
         output += '\t\t<created>' + str(self.created) + '</created>\n'
 
-        if self.creatorComment != None:
+        if self.creatorComment is not None:
             output += '\t\t<rdfs:comment>'
             output += str(self.creatorComment)
             output += '</rdfs:comment>\n'
-        if self.licenseListVersion != None:
+        if self.licenseListVersion is not None:
             output += '\t\t<licenseListVersion>'
             output += str(self.licenseListVersion)
             output += '</licenseListVersion>\n'
@@ -98,7 +94,7 @@ class creatorInfo:
         return output
 
     def outputCreatorInfo_JSON(self):
-        output =  '{\n'
+        output = '{\n'
         output += '\t\t\t"creator": "' + str(self.creator) + '",\n'
         output += '\t\t\t"created": "' + str(self.created) + '",\n'
         output += '\t\t\t"comment": "' + str(self.creatorComment) + '",\n'
